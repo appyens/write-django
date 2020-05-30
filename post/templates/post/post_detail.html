@@ -13,6 +13,8 @@
     <p>{{ post.body }}</p>
     <hr>
     <div>
+        <h3>Add comment</h3>
+        <a href="{% url 'post:share_post' post.id %}"><button class="btn btn-success">Share this post</button></a>
         <form action="" method="POST">
             {{ form.as_p }}
             {% csrf_token %}

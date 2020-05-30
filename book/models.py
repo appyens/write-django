@@ -64,7 +64,7 @@ class Author(models.Model):
     def save(self, **kwargs):
         if not self.slug:
             self.slug = slugify(self.fullname)
-            super().save(**kwargs)
+        super().save(**kwargs)
 
 
 class Publisher(models.Model):

@@ -5,7 +5,7 @@ from .models import Post, Comment
 
 
 class PostModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'publish')
+    list_display = ('title', 'status', 'publish', 'views')
 
 
 admin.site.register(Post, PostModelAdmin)
