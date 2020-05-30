@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}My blog{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<div>
+    <h2>{{ post.title }}</h2>
+    <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }} views</p>
+    <img src="{{ post.image.url }}" alt="">
+    <p>{{ post.body }}</p>
+    <hr>
+    <div>
+        <form action="" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button class="btn btn-primary">Post</button>
+        </form>
+    </div>
+    <h4>Comments</h4>
+    {% for c in comments %}
+    <p>{{ c.body }}</p>
+    <p>commented by <b>{{ c.name }}</b></p>
+    <br>
+    {% endfor %}
+
+</div>
+{% endblock content %}
+
+{% block javascript %}
+{% endblock javascript %}

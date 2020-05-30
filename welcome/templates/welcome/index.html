@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Index{% endblock title %}
+
+{% block content %}
+
+<h1 id="one">This is my first django powered page</h1>
+<h3 class="head">This is my name: {{ my_name }}</h3>
+<h3 id="two">My friend list: {{ friends }}</h3>
+<h2>My Friends</h2>
+<ol>
+    {% for f in friends %}
+    <p>
+        <li>{{ f }}</li>
+    </p>
+    {% endfor %}
+</ol>
+<h2 class="head" style="background-color: blue;">The current time is: {{ time }}</h2>
+<a href="http://www.google.com">Link</a>
+<a href="{% url 'home' %}">Here is my second page</a>
+<img src="{% static 'img/12.jpg' %}" alt="Image here">
+
+{% if my_name == "Vilas" %}
+<h1>Hi Vilas</h1>
+{% else %}
+<h1>Hi Anurag</h1>
+{% endif %}
+
+{% include 'welcome/snippets/form.html' %}
+
+{% endblock %}

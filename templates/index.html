@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Django app collection {% endblock %}
+
+{% block content %}
+<h1>Welcome to Django apps</h1>
+<ul>
+    <li><a href="{% url 'book:book_home' %}">Book library management</a></li>
+    <li><a href="{% url 'book_cbv:book_home' %}">Book library management - CBV</a></li>
+    <li><a href="{% url 'post:home' %}">Personal blog</a></li>
+    <li>Disc</li>
+    <li>Cassettes</li>
+    <li>Movies</li>
+</ul>
+
+{% endblock %}

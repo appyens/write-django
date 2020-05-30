@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Language {% endblock %}
+
+{% block content %}
+<div>
+    <h1>Add Language</h1>
+    <form id="lang_form" action="{% url 'book:add_lang' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Add"></p>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#lang_form").submit(function (event){
+        event.preventDefault();
+        var serializedData = $("#id_language").val();
+        console.log(serializedData);
+
+        $.ajax({
+            type: "POST",
+            url: "/book/language/post/",
+            data: {
+                "data": serializedData,
+             },
+            success: function( response )
+            {
+                alert(response.status);
+            }
+        })
+    });
+</script>
+{% endblock javascript %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Homepage {% endblock title %}
+
+
+{% block content %}
+
+<h1>Welcome to Django</h1>
+<p>Here is links to other urls in app</p>
+<ol>
+    <li>
+        <a href="{% url 'hello' %}">Hello</a>
+    </li>
+    <li>
+        <a href="{% url 'index' %}">Index</a>
+    </li>
+    <li>
+        <a href="{% url 'request' 'Anurag' %}">Request</a>
+    </li>
+    <li>
+        <a href="{% url 'static' %}">Static</a>
+    </li>
+</ol>
+{% endblock %}

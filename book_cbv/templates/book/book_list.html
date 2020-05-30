@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}All Books {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    {% if author %}
+    <h3>Books by {{ author }}</h3>
+    {% endif %}
+</div>
+
+<div class="row">
+
+    {% if query %}
+    <h2>Search results for: <i>{{ query }}</i></h2>
+    {% endif %}
+
+    {% for book in books %}
+    <div class="col-4">
+        <div class="card" style="width:300px">
+            <a id="book_url" href="{{ book.get_absolute_url }}">
+                <img id="cover" class="" src="{{ book.front_cover.url }}" alt="Card image" height="auto" width="300">
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">{{ book.title }}</h4>
+                <p class="card-text">{{ book.description|truncatechars:70 }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

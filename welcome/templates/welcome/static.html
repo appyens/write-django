@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Static files demo {% endblock title %}
+
+{% block content %}
+<div>
+    <img src="{% static 'img/12.jpg' %}" alt="">
+</div>
+{% endblock %}

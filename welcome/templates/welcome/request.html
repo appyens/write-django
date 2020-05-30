@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Request Demo{% endblock title %}
+
+{% block content %}
+<h1>Welcome, {{ user }}</h1>
+<h1>Request demo</h1>
+<form action="." method="POST">
+    {% csrf_token %}
+    <p><label for="user">Username: </label>
+        <input type="text" id="user" name=userid></p>
+
+    <p><label for="pass">Password: </label>
+        <input type="password" id="pass" name=password></p>
+
+    <p><input type="submit" value="Submit"></p>
+</form>
+<div>
+    <img src="http://media1.santabanta.com/full6/Indian%20%20Celebrities(F)/Neha%20Malik/neha-malik-40a.jpg"
+        style="width: auto; height: 300px;" alt="lady with white dress" srcset="">
+</div>
+{% endblock %}

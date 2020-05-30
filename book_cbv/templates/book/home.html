@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Anurag's Books collection {% endblock %}
+
+{% block content %}
+<h1>Welcome to Anurag's book library <small>Total books {{ total }}</small></h1>
+
+<div>
+    <p><a href="{% url 'book:book_list' %}">Browse books</a></p>
+    <p><a href="{% url 'book:authors_list' %}">Browse authors</a></p>
+</div>
+
+<h3>Recently added...</h3>
+<div class="row">
+    {% for book in recent %}
+    <div class="col-4">
+        <div class="card" style="width:200px">
+            <a href="{{ book.get_absolute_url }}">
+                <img class="" src="{{ book.front_cover.url }}" alt="Card image" height="auto" width="300">
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

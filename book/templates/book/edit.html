@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Book {% endblock %}
+
+{% block content %}
+<div>
+    <form action="{% url 'book:edit_book' book.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-success" type="submit" value="Save">
+    </form>
+
+</div>
+
+{% endblock %}
