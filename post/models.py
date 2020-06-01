@@ -7,10 +7,19 @@ from django.utils.text import slugify
 
 # Create your models here.
 
-
 # class PublishedManager(models.Manager):
 #     def get_queryset(self):
 #         return super().get_queryset().filter(status='published')
+
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     profile_photo = models.ImageField()
+#     address = models.CharField()
+#
+#
+# class Teacher(User):
+#     pass
 
 
 class Post(models.Model):

@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import Post, Comment
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
+from django.db.models import Q
+
+from .models import Post, Comment
 from .forms import AddCommentForm, EmailForm
 
 
@@ -15,8 +18,13 @@ def home(request):
 
 
 def post_list(request):
+
     posts = Post.objects.filter(status='published')
-    return render(request, 'post/post_list.html', {'posts': posts})
+    popular_posts = Post.objects.all().order_by('-views')[:3]
+    paginator = Paginator(object_list=posts, per_page=2)  # Show 25 contacts per page.
+    page = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page)
+    return render(request, 'post/post_list.html', {'page_obj': page_obj, 'popular': popular_posts})
 
 
 def post_detail(request, year, month, day, slug):
@@ -64,3 +72,17 @@ def share_post(request, post_id):
     else:
         form = EmailForm()
         return render(request, 'post/share.html', {'form': form})
+
+
+def search_post(request):
+    if request.method == 'GET':
+        query = request.GET.get('query', None)
+        # post_with_title = Post.objects.filter(title__icontains=query)
+        # post_with_body = Post.objects.filter(body__icontains=query)
+        # final_qs = (post_with_title | post_with_body)
+        result = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(body__icontains=query)
+        )
+
+        return render(request, 'post/post_list.html', {'result': result, 'app_name': 'post'})

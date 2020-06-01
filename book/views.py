@@ -61,7 +61,7 @@ def search_book(request):
             Q(title__icontains=query) | Q(description__icontains=query) |
             Q(authors__first_name__icontains=query) | Q(authors__last_name__icontains=query)
         ).distinct()
-        return render(request, 'book/book_list.html', {'books': books, 'query': query}, status=200)
+        return render(request, 'book/book_list.html', {'books': books, 'query': query, 'app_name': 'book'}, status=200)
 
 
 def add_author(request):
