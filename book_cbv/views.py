@@ -9,7 +9,7 @@ from .models import Author, Book
 
 
 class BookHome(TemplateView):
-    template_name = 'book/home.html'
+    template_name = 'book_cbv/home.html'
 
     def get_context_data(self, **kwargs):
         context = super(BookHome, self).get_context_data(**kwargs)

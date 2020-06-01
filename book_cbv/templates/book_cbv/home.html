@@ -9,7 +9,7 @@
 
 {% block header %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'book:book_home' %}">Books</a>
+    <a class="navbar-brand" href="{% url 'book_cbv:book_home' %}">Books CBV</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,17 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'book:book_home' %}">Welcome <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'book_cbv:book_home' %}">Welcome <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'book:book_list' %}">Browse</a>
+                <a class="nav-link" href="{% url 'book_cbv:book_list' %}">Browse</a>
             </li>
-                        <li class="nav-item">
-                <a class="nav-link" href="{% url 'book:authors_list' %}">Authors</a>
-            </li>
-
         </ul>
-        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'book:search_book' %}">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="#">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>

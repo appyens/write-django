@@ -14,18 +14,25 @@
 </head>
 
 <body>
-{% include 'snippets/navbar.html' %}
+
+{% block header %}
+
+{% endblock header %}
+
+
 <div class="container">
     {% block content %}
 
 
     {% endblock %}
 </div>
-<!-- {% include 'snippets/footer.html' %} -->
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="{% static 'js/my_script.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
 {% block javascript %}
 
 {% endblock javascript %}
