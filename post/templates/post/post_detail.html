@@ -7,26 +7,46 @@
 
 {% block content %}
 <div>
-    <h2>{{ post.title }}</h2>
-    <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }} views</p>
-    <img src="{{ post.image.url }}" alt="">
-    <p>{{ post.body }}</p>
-    <hr>
-    <div>
-        <h3>Add comment</h3>
-        <a href="{% url 'post:share_post' post.id %}"><button class="btn btn-success">Share this post</button></a>
-        <form action="" method="POST">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button class="btn btn-primary">Post</button>
-        </form>
+    <div class="row">
+        <div class="col-9">
+            <h2>{{ post.title }}</h2>
+            <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }}
+                views</p>
+            <span>Tags: <a href="">{{ post.tags.all|join:", " }}</a></span>
+            <hr>
+            <img src="{{ post.image.url }}" alt="" height="auto" width="800px">
+            <p>{{ post.body }}</p>
+            <hr>
+            <div>
+                <h3>Add comment</h3>
+                <a href="{% url 'post:share_post' post.id %}">
+                    <button class="btn btn-success">Share this post</button>
+                </a>
+                <form action="" method="POST">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button class="btn btn-primary">Post</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-3" style="background-color: cyan">
+            <h4>Related posts</h4>
+            {% for post in popular %}
+            <a href="{{ post.get_absolute_url }}"><p>{{ post.title|truncatechars:30 }}</p></a>
+            {% endfor %}
+        </div>
     </div>
-    <h4>Comments</h4>
-    {% for c in comments %}
-    <p>{{ c.body }}</p>
-    <p>commented by <b>{{ c.name }}</b></p>
-    <br>
-    {% endfor %}
+
+
+    <div>
+        <h4>Comments</h4>
+        {% for c in comments %}
+        <p>{{ c.body }}</p>
+        <p>commented by <b>{{ c.name }}</b></p>
+        <br>
+        {% endfor %}
+    </div>
+
 
 </div>
 {% endblock content %}

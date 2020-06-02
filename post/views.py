@@ -38,6 +38,9 @@ def post_detail(request, year, month, day, slug):
     comments = Comment.objects.filter(post=post)
     post.views += 1
     post.save()
+
+    # getting related posts
+    related = Post.objects.filter(tags__in=post.tags.all())
     # comments
     if request.method == 'POST':
         form = AddCommentForm(request.POST)
@@ -84,5 +87,6 @@ def search_post(request):
             Q(title__icontains=query) |
             Q(body__icontains=query)
         )
+        print(result)
 
         return render(request, 'post/post_list.html', {'result': result, 'app_name': 'post'})

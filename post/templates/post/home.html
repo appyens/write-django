@@ -43,16 +43,16 @@
         {% endfor %}
     </div>
     <div class="col-3" style="background-color: cyan">
-    <h4>Popular posts</h4>
-    {% for post in popular %}
+        <h4>Popular posts</h4>
+        {% for post in popular %}
         <a href="{{ post.get_absolute_url }}"><p>{{ post.title|truncatechars:30 }}</p></a>
-    {% endfor %}
+        {% endfor %}
         <hr>
-    <h4>Latest posts</h4>
-    {% for post in posts %}
+        <h4>Latest posts</h4>
+        {% for post in posts %}
         <a href="{{ post.get_absolute_url }}"><p>{{ post.title|truncatechars:30 }}</p></a>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock content %}

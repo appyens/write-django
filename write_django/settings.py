@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'book_cbv.apps.BookCbvConfig',
     'post.apps.PostConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [

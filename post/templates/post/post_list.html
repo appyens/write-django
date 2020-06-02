@@ -9,6 +9,16 @@
 
     {% if query %}
     <h2>Search results for: <i>{{ query }}</i></h2>
+{{ result }}
+    <div class="col-9">
+        {% for post in result %}
+        <div class="jumbotron">
+            <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+            <p><i>by {{ post.author }} published on {{ post.publish }}</i></p>
+            <p>{{ post.body|truncatechars:200 }}<span><a href="{{ post.get_absolute_url }}">read more</a></span></p>
+        </div>
+        {% endfor %}
+    </div>
     {% endif %}
 
 <div class="row">
