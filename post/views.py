@@ -93,6 +93,4 @@ def search_post(request):
             Q(title__icontains=query) |
             Q(body__icontains=query)
         )
-        print(result)
-
         return render(request, 'post/post_list.html', {'result': result, 'app_name': 'post'})
