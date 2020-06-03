@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+
 
 # Create your models here.
 
@@ -35,7 +37,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField()
     image = models.ImageField(upload_to='post/%y/%m/%d/', blank=True, null=True)
-    publish = models.DateTimeField(default=timezone.now)
+    publish = models.DateTimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='draft')
@@ -63,6 +65,14 @@ class Post(models.Model):
             self.publish.day,
             self.slug
         ])
+
+    def clean(self):
+        # Don't allow draft entries to have a pub_date.
+        if self.status == 'draft' and self.publish is not None:
+            raise ValidationError('Draft entries may not have a publication date.')
+        # Set the pub_date for published items if it hasn't been set already.
+        if self.status == 'published' and self.publish is None:
+            self.pub_date = timezone.now()
 
 
 # class Tags(models.Model):

@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.db.models import F
+from django.http.response import HttpResponse
 
 from .models import Post, Comment
 from .forms import AddCommentForm, EmailForm
@@ -30,14 +32,14 @@ def post_list(request):
 def post_detail(request, year, month, day, slug):
     # try:
     #     post = Post.objects.get(slug=post_slug)
-    # except ObjectDoesNotExist as err:
+    # except Post.DoesNotExist as err:
     #     pass
 
     # getting post
     post = get_object_or_404(Post, slug=slug, publish__year=year, publish__month=month, publish__day=day)
     comments = Comment.objects.filter(post=post)
-    post.views += 1
-    post.save()
+    post.views = F('views') + 1
+    post.save(update_fields=['views'])
 
     # getting related posts
     related = Post.objects.filter(tags__in=post.tags.all())
@@ -72,6 +74,10 @@ def share_post(request, post_id):
             send_mail(subject=subject, message=email_message, from_email='admin@myblog.com', recipient_list=[to_id,])
             messages.success(request, "Post has been shared successfully")
             return redirect(post.get_absolute_url())
+        else:
+            form = EmailForm()
+            messages.error(request, "Please provide valid name")
+            return render(request, 'post/share.html', {'form': form})
     else:
         form = EmailForm()
         return render(request, 'post/share.html', {'form': form})
