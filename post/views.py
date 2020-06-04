@@ -42,7 +42,11 @@ def post_detail(request, year, month, day, slug):
     post.save(update_fields=['views'])
 
     # getting related posts
-    related = Post.objects.filter(tags__in=post.tags.all())
+    # post_tags_id = post.tags.all().values_list('id', flat=True)
+    # related = Post.objects.filter(tags__in=post_tags_id).exclude(tags__in=post.tags.id)
+    # final_related = related.annotate(same_tags=)
+
+    # print(related)
     # comments
     if request.method == 'POST':
         form = AddCommentForm(request.POST)

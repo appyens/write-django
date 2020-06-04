@@ -10,8 +10,7 @@
     <div class="row">
         <div class="col-9">
             <h2>{{ post.title }}</h2>
-            <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }}
-                views</p>
+            <p>by {{ post.author }} published on {{ post.publish }} | {{ comments.count }} comments | {{ post.views }} views</p>
             <span>Tags: <a href="">{{ post.tags.all|join:", " }}</a></span>
             <hr>
             <img src="{{ post.image.url }}" alt="" height="auto" width="800px">

@@ -23,7 +23,6 @@ from django.core.exceptions import ValidationError
 # class Teacher(User):
 #     pass
 
-
 class Post(models.Model):
     """
     """
