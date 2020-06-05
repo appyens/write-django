@@ -2,26 +2,13 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
-from taggit.managers import TaggableManager
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
+from taggit.managers import TaggableManager
 
-# Create your models here.
+from .managers import PostManager
 
-# class PublishedManager(models.Manager):
-#     def get_queryset(self):
-#         return super().get_queryset().filter(status='published')
-
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     profile_photo = models.ImageField()
-#     address = models.CharField()
-#
-#
-# class Teacher(User):
-#     pass
 
 class Post(models.Model):
     """
@@ -41,9 +28,9 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='draft')
     views = models.IntegerField(default=0)
-    # objects = models.Manager()  # default manager
-    # published = PublishedManager()  # custom manager
 
+    objects = models.Manager()  # default manager
+    custom = PostManager()  # custom manager
     tags = TaggableManager()
 
     class Meta:
@@ -73,10 +60,9 @@ class Post(models.Model):
         if self.status == 'published' and self.publish is None:
             self.pub_date = timezone.now()
 
-
-# class Tags(models.Model):
-#     post = models.ManyToManyField(Post, on_delete=models.DO_NOTHING)
-#     tag = models.CharField(max_length=128)
+    def post_tags(self):
+        tags = ", ".join(self.tags.all().values_list('name', flat=True))
+        return tags
 
 
 class Comment(models.Model):

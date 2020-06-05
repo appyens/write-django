@@ -5,7 +5,10 @@ from .models import Post, Comment
 
 
 class PostModelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'publish', 'views')
+    list_display = ('title', 'status', 'publish', 'views', 'post_tags')
+    #
+    # def get_tags(self):
+    #     pass
 
 
 admin.site.register(Post, PostModelAdmin)
