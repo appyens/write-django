@@ -2,13 +2,13 @@
 
 """ views for book app """
 
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView, View
+from django.views import generic
 from django.contrib import messages
 
 from .models import Author, Book
 
 
-class BookHome(TemplateView):
+class BookHome(generic.TemplateView):
     template_name = 'book_cbv/home.html'
 
     def get_context_data(self, **kwargs):
@@ -18,12 +18,12 @@ class BookHome(TemplateView):
         return context
 
 
-class BookListView(ListView):
+class BookListView(generic.ListView):
     model = Book
     context_object_name = 'books'
 
 
-class BookDetailView(DetailView):
+class BookDetailView(generic.DetailView):
     model = Book
     context_object_name = 'book'
 
@@ -35,10 +35,13 @@ class BookDetailView(DetailView):
         print(context)
         return context
 
+    def get(self, request, *args, **kwargs):
+        pass
 
-class BookEditView(UpdateView):
+
+class BookEditView(generic.UpdateView):
     pass
 
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(generic.DeleteView):
     pass

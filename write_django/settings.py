@@ -136,3 +136,5 @@ EMAIL_HOST_USER = 'an.anuraag@gmail.com'
 EMAIL_HOST_PASSWORD = 'qvvkpprhqxhtodsj'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# AUTH_USER_MODEL = 'accounts.MyUser'
