@@ -16,7 +16,7 @@ urlpatterns = [
     path('<int:pk>/edit/', views.edit_book, name='edit_book'),
     path('delete/<int:book_id>/', views.delete_book, name='delete_book'),
     # ajax
-    # path('like/', views.like_book, name="like_book"),
+    path('like/', views.like_book, name="like_book"),
     # path('language/add/', views.add_language, name='add_lang'),
     # path('language/post/', views.post_language, name='post_lang'),
 

@@ -5,7 +5,7 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-# from django.http import JsonResponse
+from django.http import JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
@@ -121,13 +121,13 @@ def delete_book(request, book_id):
     # book.delete()
     return redirect('book_list')
 
-#
-# def like_book(request):
-#     if request.method == 'GET':
-#         status = request.GET.get("status")
-#         if status == "Like":
-#             return JsonResponse({"status": "Unlike"})
-#         return JsonResponse({"status": "Like"})
+
+def like_book(request):
+    if request.method == 'GET':
+        status = request.GET.get("status")
+        if status == "Like":
+            return JsonResponse({"status": "Unlike"})
+        return JsonResponse({"status": "Like"})
 #
 #
 # def add_language(request):

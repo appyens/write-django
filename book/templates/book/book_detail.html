@@ -85,7 +85,7 @@ $("#like").click(function (event){
     console.log(value)
     $.ajax({
         type: "GET",
-        url: "/book/like/",
+        url: "/books/like/",
         data: {
             "status": value,
             "book_id": {{ book.id }}
@@ -100,11 +100,8 @@ $("#like").click(function (event){
             }else{
                 $("#like").attr("class", 'btn btn-danger');
             }
-
         }
-
     });
-
 });
 </script>
 
